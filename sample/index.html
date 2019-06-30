@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test Galactus</title>
+<script type="text/javascript" src="./galactus-mini/RulesEngine.js"></script>
+<script type="text/javascript" src="./galactus-mini/RuleBuilder.js"></script>
+<script type="text/javascript">
+    var equalConfig = {
+        id:'EQUAL',
+        processor:function(fIns){
+            var a = fIns[0];
+            var b = fIns[1];
+            return a === b;
+        }
+    };
+
+    var gtConfig = {
+        id:'GREATER_THAN',
+        processor:function(fIns){
+            var a = fIns[0];
+            var b = fIns[1];
+            return a > b;
+        }
+    }
+
+    var ltConfig = {
+        id:'LESS_THAN',
+        processor:function(fIns){
+            var a = fIns[0];
+            var b = fIns[1];
+            return a < b;
+        }
+    }
+
+    var ltEqualConfig = {
+        id:'LESS_THAN_EQUAL',
+        processor:function(fIns){
+            var a = fIns[0];
+            var b = fIns[1];
+            return a <= b;
+        }
+    }
+
+    nodeList = [
+        buildNode(equalConfig),
+        buildNode(gtConfig),
+        buildNode(ltConfig),
+        buildNode(ltEqualConfig),
+    ];
+    
+    var ruleConfig = { 
+        value:1000,
+        node:'GREATER_THAN',
+        paths:[{
+            value:1500,
+            node:'LESS_THAN_EQUAL',
+            paths:[
+                {
+                    value:1100,
+                    node:'EQUAL',
+                    paths:[]
+                },
+                {
+                    value:1200,
+                    node:'EQUAL',
+                    paths:[]
+                }
+            ]
+        }],
+        elseOut:{
+            value:99,
+            node:'EQUAL',
+            paths:[]
+        }
+    };
+    var ruleFlow = ruleBuilder(ruleConfig);
+
+    function test(){
+        
+        var textFieldVal = ruleFlow.process(parseInt(document.getElementById("amount").value));
+        document.getElementById('result').innerHTML = textFieldVal;
+        
+    }
+</script>
+</head>
+
+<body>
+    <pre>
+        <code>
+            var ruleConfig = { 
+                value:1000,
+                node:'GREATER_THAN',
+                paths:[{
+                    value:1500,
+                    node:'LESS_THAN_EQUAL',
+                    paths:[
+                        {
+                            value:1100,
+                            node:'EQUAL',
+                            paths:[]
+                        },
+                        {
+                            value:1200,
+                            node:'EQUAL',
+                            paths:[]
+                        }
+                    ]
+                }],
+                elseOut:{
+                    value:99,
+                    node:'EQUAL',
+                    paths:[]
+                }
+            }
+        </code>
+    </pre>
+    <label>Input Test Amount:</label><input type="text" id="amount"/><button onclick="test()">Test</button>
+    <div id='result'></div>
+</body>
+
+</html>
