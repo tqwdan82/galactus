@@ -1,4 +1,4 @@
-# galactus
+# Galactus Rules Engine
 A JavaScript library that allows you use and manage a rule engine. You can define you rule check rules using JSON and use the Rule Builder to build the rule for you. Once created you can process your data input based on the rule you created.
 
 ## Getting Started
