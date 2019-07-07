@@ -18,18 +18,22 @@ The rule is defined like a tree.
 var ruleConfig = { 
         value:1000,
         node:'GREATER_THAN',
+        dataRef:'data',
         paths:[{
             value:1500,
             node:'LESS_THAN_EQUAL',
+            dataRef:'product.price',
             paths:[
                 {
                     value:1100,
                     node:'EQUAL',
+                    dataRef:'product.price',
                     paths:[]
                 },
                 {
                     value:1200,
                     node:'EQUAL',
+                    dataRef:'product.price',
                     paths:[]
                 }
             ]
@@ -37,6 +41,7 @@ var ruleConfig = {
         elseOut:{
             value:99,
             node:'EQUAL',
+            dataRef:'data',
             paths:[]
         }
     };
@@ -44,7 +49,7 @@ var ruleConfig = {
 
 3. Call the rule's process() method with your data as an input
 ```
-ruleFlow.process(parseInt(document.getElementById("amount").value)
+ruleFlow.process(JSON.parse(document.getElementById("amount").value))
 ```
 
 3. Define your own rule component and use them
@@ -78,6 +83,7 @@ Look in the sample directory for a simple example
 ## Authors
 
 * **TQW** - *Initial work* - [tqwdan82](https://github.com/tqwdan82)
+* **TQW** - *Modified to accept a json object as input to engine* - [tqwdan82](https://github.com/tqwdan82)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project, if any.
 
