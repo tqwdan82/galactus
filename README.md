@@ -51,6 +51,10 @@ var ruleConfig = {
 ```
 ruleFlow.process(JSON.parse(document.getElementById("amount").value))
 ```
+A sample of the data,
+```
+{"data":1200,"product":{"name":"ttt","price":1100}}
+```
 
 3. Define your own rule component and use them
 ```
