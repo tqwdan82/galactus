@@ -52,18 +52,22 @@
     var ruleConfig = { 
         value:1000,
         node:'GREATER_THAN',
+        dataRef:'data',
         paths:[{
             value:1500,
             node:'LESS_THAN_EQUAL',
+            dataRef:'product.price',
             paths:[
                 {
                     value:1100,
                     node:'EQUAL',
+                    dataRef:'product.price',
                     paths:[]
                 },
                 {
                     value:1200,
                     node:'EQUAL',
+                    dataRef:'product.price',
                     paths:[]
                 }
             ]
@@ -71,14 +75,14 @@
         elseOut:{
             value:99,
             node:'EQUAL',
+            dataRef:'data',
             paths:[]
         }
     };
     var ruleFlow = ruleBuilder(ruleConfig);
 
     function test(){
-        
-        var textFieldVal = ruleFlow.process(parseInt(document.getElementById("amount").value));
+        var textFieldVal = ruleFlow.process(JSON.parse(document.getElementById("amount").value));
         document.getElementById('result').innerHTML = textFieldVal;
         
     }
@@ -91,18 +95,22 @@
             var ruleConfig = { 
                 value:1000,
                 node:'GREATER_THAN',
+                dataRef:'data',
                 paths:[{
                     value:1500,
                     node:'LESS_THAN_EQUAL',
+                    dataRef:'product.price',
                     paths:[
                         {
                             value:1100,
                             node:'EQUAL',
+                            dataRef:'product.price',
                             paths:[]
                         },
                         {
                             value:1200,
                             node:'EQUAL',
+                            dataRef:'product.price',
                             paths:[]
                         }
                     ]
@@ -110,12 +118,13 @@
                 elseOut:{
                     value:99,
                     node:'EQUAL',
+                    dataRef:'data',
                     paths:[]
                 }
-            }
+            };
         </code>
     </pre>
-    <label>Input Test Amount:</label><input type="text" id="amount"/><button onclick="test()">Test</button>
+    <label>Input Test Amount:</label><textarea rows="5" cols="100" id="amount">{"data":1200,"product":{"name":"ttt","price":1100}}</textarea><button onclick="test()">Test</button>
     <div id='result'></div>
 </body>
 
